@@ -129,6 +129,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyData.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
