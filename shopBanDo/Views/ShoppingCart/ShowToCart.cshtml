@@ -1,0 +1,45 @@
+﻿@model shopBanDo.Models.Cart
+
+@{
+    ViewBag.Title = "ShowToCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowToCart</h2>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name: </th>
+                <th>Product Image: </th>
+                <th>Product Price: </th>
+                <th>Product quantity: </th>
+                <th>Product Sum: </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.Items)
+            {
+                double total = item._Shopping_product.DonGia.Value * item._shopping_quanity;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item._Shopping_product.TenSP)
+                    </td>
+                    <td>
+                        <img src="@Url.Content(item._Shopping_product.HinhAnh)"  style="width:100px; height:100px" alt="Alternate Text" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item._Shopping_product.DonGia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item._Shopping_product.SoLuong)
+                    </td>
+                    <td>
+                        Total:@total
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

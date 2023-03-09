@@ -31,15 +31,15 @@ namespace shopBanDo.Models
         }
         public ShoppingCart(int id)
         {
-            MaHD = id;
-            ShoppingCart shoppingCart = data.ChiTietHoaDons.SingleOrDefault(n => n.MaHD == MaHD);
-            MaSp = shoppingCart.MaSp;
-            KhuyenMai = shoppingCart.KhuyenMai;
-            TongTien = shoppingCart.TongTien;
-            NgayLapHoaDon = shoppingCart.NgayLapHoaDon;
-            Email = shoppingCart.Email;
-            SoLuongSanPham = shoppingCart.SoLuongSanPham;
-            DonGia = shoppingCart.DonGia;
+            //MaHD = id;
+            //ShoppingCart shoppingCart = data.ChiTietHoaDons.Single(n => n.MaHD== MaHD);
+            //MaSp = shoppingCart.MaSp;
+            //KhuyenMai = shoppingCart.KhuyenMai;
+            //TongTien = shoppingCart.TongTien;
+            //NgayLapHoaDon = shoppingCart.NgayLapHoaDon;
+            //Email = shoppingCart.Email;
+            //SoLuongSanPham = shoppingCart.SoLuongSanPham;
+            //DonGia = shoppingCart.DonGia;
         }
     }
 }
