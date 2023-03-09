@@ -22,7 +22,7 @@ namespace shopBanDo.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DoAnLapTrinhWeb")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DoAn")]
 	public partial class MyDataDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,9 +33,9 @@ namespace shopBanDo.Models
     partial void InsertShipper(Shipper instance);
     partial void UpdateShipper(Shipper instance);
     partial void DeleteShipper(Shipper instance);
-    partial void InsertDK(DK instance);
-    partial void UpdateDK(DK instance);
-    partial void DeleteDK(DK instance);
+    partial void InsertChucVu(ChucVu instance);
+    partial void UpdateChucVu(ChucVu instance);
+    partial void DeleteChucVu(ChucVu instance);
     partial void InsertDonDatHang(DonDatHang instance);
     partial void UpdateDonDatHang(DonDatHang instance);
     partial void DeleteDonDatHang(DonDatHang instance);
@@ -45,9 +45,9 @@ namespace shopBanDo.Models
     partial void InsertKhachHang(KhachHang instance);
     partial void UpdateKhachHang(KhachHang instance);
     partial void DeleteKhachHang(KhachHang instance);
-    partial void InsertLoaiSP(LoaiSP instance);
-    partial void UpdateLoaiSP(LoaiSP instance);
-    partial void DeleteLoaiSP(LoaiSP instance);
+    partial void InsertLoaiSanPham(LoaiSanPham instance);
+    partial void UpdateLoaiSanPham(LoaiSanPham instance);
+    partial void DeleteLoaiSanPham(LoaiSanPham instance);
     partial void InsertNhanVien(NhanVien instance);
     partial void UpdateNhanVien(NhanVien instance);
     partial void DeleteNhanVien(NhanVien instance);
@@ -57,7 +57,7 @@ namespace shopBanDo.Models
     #endregion
 		
 		public MyDataDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DoAnLapTrinhWebConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DoAnConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -86,11 +86,11 @@ namespace shopBanDo.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<CTDDH> CTDDHs
+		public System.Data.Linq.Table<ChiTietDonDatHang> ChiTietDonDatHangs
 		{
 			get
 			{
-				return this.GetTable<CTDDH>();
+				return this.GetTable<ChiTietDonDatHang>();
 			}
 		}
 		
@@ -102,19 +102,19 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<CTHD> CTHDs
+		public System.Data.Linq.Table<ChiTietHoaDon> ChiTietHoaDons
 		{
 			get
 			{
-				return this.GetTable<CTHD>();
+				return this.GetTable<ChiTietHoaDon>();
 			}
 		}
 		
-		public System.Data.Linq.Table<DK> DKs
+		public System.Data.Linq.Table<ChucVu> ChucVus
 		{
 			get
 			{
-				return this.GetTable<DK>();
+				return this.GetTable<ChucVu>();
 			}
 		}
 		
@@ -150,11 +150,11 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<LoaiSP> LoaiSPs
+		public System.Data.Linq.Table<LoaiSanPham> LoaiSanPhams
 		{
 			get
 			{
-				return this.GetTable<LoaiSP>();
+				return this.GetTable<LoaiSanPham>();
 			}
 		}
 		
@@ -175,26 +175,24 @@ namespace shopBanDo.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CTDDH")]
-	public partial class CTDDH
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ChiTietDonDatHang")]
+	public partial class ChiTietDonDatHang
 	{
 		
-		private string _MaDDH;
+		private System.Nullable<int> _MaDDH;
 		
-		private string _MaShipper;
+		private System.Nullable<int> _MaShipper;
 		
 		private System.Nullable<System.DateTime> _NgayGiaoDuKien;
 		
-		private System.Nullable<int> _SoLuongDat;
+		private string _TinhTrangSanPham;
 		
-		private System.Nullable<double> _TongTien;
-		
-		public CTDDH()
+		public ChiTietDonDatHang()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDDH", DbType="VarChar(10)")]
-		public string MaDDH
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDDH", DbType="Int")]
+		public System.Nullable<int> MaDDH
 		{
 			get
 			{
@@ -209,8 +207,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaShipper", DbType="VarChar(10)")]
-		public string MaShipper
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaShipper", DbType="Int")]
+		public System.Nullable<int> MaShipper
 		{
 			get
 			{
@@ -241,34 +239,18 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoLuongDat", DbType="Int")]
-		public System.Nullable<int> SoLuongDat
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TinhTrangSanPham", DbType="NVarChar(50)")]
+		public string TinhTrangSanPham
 		{
 			get
 			{
-				return this._SoLuongDat;
+				return this._TinhTrangSanPham;
 			}
 			set
 			{
-				if ((this._SoLuongDat != value))
+				if ((this._TinhTrangSanPham != value))
 				{
-					this._SoLuongDat = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TongTien", DbType="Float")]
-		public System.Nullable<double> TongTien
-		{
-			get
-			{
-				return this._TongTien;
-			}
-			set
-			{
-				if ((this._TongTien != value))
-				{
-					this._TongTien = value;
+					this._TinhTrangSanPham = value;
 				}
 			}
 		}
@@ -280,7 +262,7 @@ namespace shopBanDo.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MaShipper;
+		private int _MaShipper;
 		
 		private string _TenShipper;
 		
@@ -294,7 +276,7 @@ namespace shopBanDo.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaShipperChanging(string value);
+    partial void OnMaShipperChanging(int value);
     partial void OnMaShipperChanged();
     partial void OnTenShipperChanging(string value);
     partial void OnTenShipperChanged();
@@ -311,8 +293,8 @@ namespace shopBanDo.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaShipper", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaShipper
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaShipper", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaShipper
 		{
 			get
 			{
@@ -432,26 +414,30 @@ namespace shopBanDo.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CTHD")]
-	public partial class CTHD
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ChiTietHoaDon")]
+	public partial class ChiTietHoaDon
 	{
 		
-		private string _MaHD;
+		private System.Nullable<int> _MaHD;
 		
-		private string _MaSP;
+		private System.Nullable<int> _MaSP;
 		
 		private System.Nullable<double> _KhuyenMai;
 		
-		private System.Nullable<int> _TongTien;
+		private System.Nullable<double> _TongTien;
 		
 		private System.Nullable<System.DateTime> _NgayLapHoaDon;
 		
-		public CTHD()
+		private string _Email;
+		
+		private System.Nullable<int> _SoLuongSanPham;
+		
+		public ChiTietHoaDon()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaHD", DbType="VarChar(10)")]
-		public string MaHD
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaHD", DbType="Int")]
+		public System.Nullable<int> MaHD
 		{
 			get
 			{
@@ -466,8 +452,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="VarChar(10)")]
-		public string MaSP
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="Int")]
+		public System.Nullable<int> MaSP
 		{
 			get
 			{
@@ -498,8 +484,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TongTien", DbType="Int")]
-		public System.Nullable<int> TongTien
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TongTien", DbType="Float")]
+		public System.Nullable<double> TongTien
 		{
 			get
 			{
@@ -529,103 +515,6 @@ namespace shopBanDo.Models
 				}
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DK")]
-	public partial class DK : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _UserKH;
-		
-		private string _PassKH;
-		
-		private System.Nullable<int> _SDT;
-		
-		private string _Email;
-		
-		private EntitySet<KhachHang> _KhachHangs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserKHChanging(string value);
-    partial void OnUserKHChanged();
-    partial void OnPassKHChanging(string value);
-    partial void OnPassKHChanged();
-    partial void OnSDTChanging(System.Nullable<int> value);
-    partial void OnSDTChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    #endregion
-		
-		public DK()
-		{
-			this._KhachHangs = new EntitySet<KhachHang>(new Action<KhachHang>(this.attach_KhachHangs), new Action<KhachHang>(this.detach_KhachHangs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserKH", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserKH
-		{
-			get
-			{
-				return this._UserKH;
-			}
-			set
-			{
-				if ((this._UserKH != value))
-				{
-					this.OnUserKHChanging(value);
-					this.SendPropertyChanging();
-					this._UserKH = value;
-					this.SendPropertyChanged("UserKH");
-					this.OnUserKHChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PassKH", DbType="NVarChar(50)")]
-		public string PassKH
-		{
-			get
-			{
-				return this._PassKH;
-			}
-			set
-			{
-				if ((this._PassKH != value))
-				{
-					this.OnPassKHChanging(value);
-					this.SendPropertyChanging();
-					this._PassKH = value;
-					this.SendPropertyChanged("PassKH");
-					this.OnPassKHChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SDT", DbType="Int")]
-		public System.Nullable<int> SDT
-		{
-			get
-			{
-				return this._SDT;
-			}
-			set
-			{
-				if ((this._SDT != value))
-				{
-					this.OnSDTChanging(value);
-					this.SendPropertyChanging();
-					this._SDT = value;
-					this.SendPropertyChanged("SDT");
-					this.OnSDTChanged();
-				}
-			}
-		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50)")]
 		public string Email
@@ -638,25 +527,106 @@ namespace shopBanDo.Models
 			{
 				if ((this._Email != value))
 				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
 					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DK_KhachHang", Storage="_KhachHangs", ThisKey="UserKH", OtherKey="UserKH")]
-		public EntitySet<KhachHang> KhachHangs
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoLuongSanPham", DbType="Int")]
+		public System.Nullable<int> SoLuongSanPham
 		{
 			get
 			{
-				return this._KhachHangs;
+				return this._SoLuongSanPham;
 			}
 			set
 			{
-				this._KhachHangs.Assign(value);
+				if ((this._SoLuongSanPham != value))
+				{
+					this._SoLuongSanPham = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ChucVu")]
+	public partial class ChucVu : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _MaCV;
+		
+		private string _TenCV;
+		
+		private EntitySet<NhanVien> _NhanViens;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMaCVChanging(int value);
+    partial void OnMaCVChanged();
+    partial void OnTenCVChanging(string value);
+    partial void OnTenCVChanged();
+    #endregion
+		
+		public ChucVu()
+		{
+			this._NhanViens = new EntitySet<NhanVien>(new Action<NhanVien>(this.attach_NhanViens), new Action<NhanVien>(this.detach_NhanViens));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaCV", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaCV
+		{
+			get
+			{
+				return this._MaCV;
+			}
+			set
+			{
+				if ((this._MaCV != value))
+				{
+					this.OnMaCVChanging(value);
+					this.SendPropertyChanging();
+					this._MaCV = value;
+					this.SendPropertyChanged("MaCV");
+					this.OnMaCVChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenCV", DbType="NVarChar(50)")]
+		public string TenCV
+		{
+			get
+			{
+				return this._TenCV;
+			}
+			set
+			{
+				if ((this._TenCV != value))
+				{
+					this.OnTenCVChanging(value);
+					this.SendPropertyChanging();
+					this._TenCV = value;
+					this.SendPropertyChanged("TenCV");
+					this.OnTenCVChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ChucVu_NhanVien", Storage="_NhanViens", ThisKey="MaCV", OtherKey="MaCV")]
+		public EntitySet<NhanVien> NhanViens
+		{
+			get
+			{
+				return this._NhanViens;
+			}
+			set
+			{
+				this._NhanViens.Assign(value);
 			}
 		}
 		
@@ -680,16 +650,16 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		private void attach_KhachHangs(KhachHang entity)
+		private void attach_NhanViens(NhanVien entity)
 		{
 			this.SendPropertyChanging();
-			entity.DK = this;
+			entity.ChucVu = this;
 		}
 		
-		private void detach_KhachHangs(KhachHang entity)
+		private void detach_NhanViens(NhanVien entity)
 		{
 			this.SendPropertyChanging();
-			entity.DK = null;
+			entity.ChucVu = null;
 		}
 	}
 	
@@ -699,13 +669,13 @@ namespace shopBanDo.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MaDDH;
+		private int _MaDDH;
 		
-		private string _MaSP;
+		private System.Nullable<int> _MaSP;
 		
-		private string _MaNV;
+		private System.Nullable<int> _MaNV;
 		
-		private string _MaKH;
+		private System.Nullable<int> _MaKH;
 		
 		private System.Nullable<System.DateTime> _NgayDatHang;
 		
@@ -719,13 +689,13 @@ namespace shopBanDo.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaDDHChanging(string value);
+    partial void OnMaDDHChanging(int value);
     partial void OnMaDDHChanged();
-    partial void OnMaSPChanging(string value);
+    partial void OnMaSPChanging(System.Nullable<int> value);
     partial void OnMaSPChanged();
-    partial void OnMaNVChanging(string value);
+    partial void OnMaNVChanging(System.Nullable<int> value);
     partial void OnMaNVChanged();
-    partial void OnMaKHChanging(string value);
+    partial void OnMaKHChanging(System.Nullable<int> value);
     partial void OnMaKHChanged();
     partial void OnNgayDatHangChanging(System.Nullable<System.DateTime> value);
     partial void OnNgayDatHangChanged();
@@ -739,8 +709,8 @@ namespace shopBanDo.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDDH", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaDDH
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDDH", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaDDH
 		{
 			get
 			{
@@ -759,8 +729,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="VarChar(10)")]
-		public string MaSP
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="Int")]
+		public System.Nullable<int> MaSP
 		{
 			get
 			{
@@ -783,8 +753,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="VarChar(10)")]
-		public string MaNV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Int")]
+		public System.Nullable<int> MaNV
 		{
 			get
 			{
@@ -807,8 +777,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKH", DbType="VarChar(10)")]
-		public string MaKH
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKH", DbType="Int")]
+		public System.Nullable<int> MaKH
 		{
 			get
 			{
@@ -878,7 +848,7 @@ namespace shopBanDo.Models
 					}
 					else
 					{
-						this._MaKH = default(string);
+						this._MaKH = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("KhachHang");
 				}
@@ -912,7 +882,7 @@ namespace shopBanDo.Models
 					}
 					else
 					{
-						this._MaNV = default(string);
+						this._MaNV = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("NhanVien");
 				}
@@ -946,7 +916,7 @@ namespace shopBanDo.Models
 					}
 					else
 					{
-						this._MaSP = default(string);
+						this._MaSP = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("SanPham");
 				}
@@ -980,15 +950,13 @@ namespace shopBanDo.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MaHD;
+		private int _MaHD;
 		
-		private string _MaKH;
+		private System.Nullable<int> _MaKH;
 		
-		private string _MaNV;
+		private System.Nullable<int> _MaNV;
 		
 		private string _Email;
-		
-		private System.Nullable<int> _SoLuongMua;
 		
 		private EntityRef<KhachHang> _KhachHang;
 		
@@ -998,16 +966,14 @@ namespace shopBanDo.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaHDChanging(string value);
+    partial void OnMaHDChanging(int value);
     partial void OnMaHDChanged();
-    partial void OnMaKHChanging(string value);
+    partial void OnMaKHChanging(System.Nullable<int> value);
     partial void OnMaKHChanged();
-    partial void OnMaNVChanging(string value);
+    partial void OnMaNVChanging(System.Nullable<int> value);
     partial void OnMaNVChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
-    partial void OnSoLuongMuaChanging(System.Nullable<int> value);
-    partial void OnSoLuongMuaChanged();
     #endregion
 		
 		public HoaDon()
@@ -1017,8 +983,8 @@ namespace shopBanDo.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaHD", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaHD
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaHD", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaHD
 		{
 			get
 			{
@@ -1037,8 +1003,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKH", DbType="VarChar(10)")]
-		public string MaKH
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKH", DbType="Int")]
+		public System.Nullable<int> MaKH
 		{
 			get
 			{
@@ -1061,8 +1027,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="VarChar(10)")]
-		public string MaNV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Int")]
+		public System.Nullable<int> MaNV
 		{
 			get
 			{
@@ -1105,26 +1071,6 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoLuongMua", DbType="Int")]
-		public System.Nullable<int> SoLuongMua
-		{
-			get
-			{
-				return this._SoLuongMua;
-			}
-			set
-			{
-				if ((this._SoLuongMua != value))
-				{
-					this.OnSoLuongMuaChanging(value);
-					this.SendPropertyChanging();
-					this._SoLuongMua = value;
-					this.SendPropertyChanged("SoLuongMua");
-					this.OnSoLuongMuaChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KhachHang_HoaDon", Storage="_KhachHang", ThisKey="MaKH", OtherKey="MaKH", IsForeignKey=true)]
 		public KhachHang KhachHang
 		{
@@ -1152,7 +1098,7 @@ namespace shopBanDo.Models
 					}
 					else
 					{
-						this._MaKH = default(string);
+						this._MaKH = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("KhachHang");
 				}
@@ -1186,7 +1132,7 @@ namespace shopBanDo.Models
 					}
 					else
 					{
-						this._MaNV = default(string);
+						this._MaNV = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("NhanVien");
 				}
@@ -1220,7 +1166,7 @@ namespace shopBanDo.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MaKH;
+		private int _MaKH;
 		
 		private string _TenKH;
 		
@@ -1238,13 +1184,11 @@ namespace shopBanDo.Models
 		
 		private EntitySet<HoaDon> _HoaDons;
 		
-		private EntityRef<DK> _DK;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaKHChanging(string value);
+    partial void OnMaKHChanging(int value);
     partial void OnMaKHChanged();
     partial void OnTenKHChanging(string value);
     partial void OnTenKHChanged();
@@ -1264,12 +1208,11 @@ namespace shopBanDo.Models
 		{
 			this._DonDatHangs = new EntitySet<DonDatHang>(new Action<DonDatHang>(this.attach_DonDatHangs), new Action<DonDatHang>(this.detach_DonDatHangs));
 			this._HoaDons = new EntitySet<HoaDon>(new Action<HoaDon>(this.attach_HoaDons), new Action<HoaDon>(this.detach_HoaDons));
-			this._DK = default(EntityRef<DK>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKH", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaKH
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKH", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaKH
 		{
 			get
 			{
@@ -1379,10 +1322,6 @@ namespace shopBanDo.Models
 			{
 				if ((this._UserKH != value))
 				{
-					if (this._DK.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnUserKHChanging(value);
 					this.SendPropertyChanging();
 					this._UserKH = value;
@@ -1438,40 +1377,6 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DK_KhachHang", Storage="_DK", ThisKey="UserKH", OtherKey="UserKH", IsForeignKey=true)]
-		public DK DK
-		{
-			get
-			{
-				return this._DK.Entity;
-			}
-			set
-			{
-				DK previousValue = this._DK.Entity;
-				if (((previousValue != value) 
-							|| (this._DK.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DK.Entity = null;
-						previousValue.KhachHangs.Remove(this);
-					}
-					this._DK.Entity = value;
-					if ((value != null))
-					{
-						value.KhachHangs.Add(this);
-						this._UserKH = value.UserKH;
-					}
-					else
-					{
-						this._UserKH = default(string);
-					}
-					this.SendPropertyChanged("DK");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1521,7 +1426,7 @@ namespace shopBanDo.Models
 	public partial class Kho
 	{
 		
-		private string _MaSP;
+		private System.Nullable<int> _MaSP;
 		
 		private System.Nullable<double> _GiaNhap;
 		
@@ -1535,8 +1440,8 @@ namespace shopBanDo.Models
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="VarChar(10)")]
-		public string MaSP
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="Int")]
+		public System.Nullable<int> MaSP
 		{
 			get
 			{
@@ -1616,13 +1521,13 @@ namespace shopBanDo.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoaiSP")]
-	public partial class LoaiSP : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoaiSanPham")]
+	public partial class LoaiSanPham : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MaLoai;
+		private int _MaLoai;
 		
 		private string _TenLoai;
 		
@@ -1632,20 +1537,20 @@ namespace shopBanDo.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaLoaiChanging(string value);
+    partial void OnMaLoaiChanging(int value);
     partial void OnMaLoaiChanged();
     partial void OnTenLoaiChanging(string value);
     partial void OnTenLoaiChanged();
     #endregion
 		
-		public LoaiSP()
+		public LoaiSanPham()
 		{
 			this._SanPhams = new EntitySet<SanPham>(new Action<SanPham>(this.attach_SanPhams), new Action<SanPham>(this.detach_SanPhams));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLoai", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaLoai
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLoai", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaLoai
 		{
 			get
 			{
@@ -1684,7 +1589,7 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiSP_SanPham", Storage="_SanPhams", ThisKey="MaLoai", OtherKey="MaLoai")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiSanPham_SanPham", Storage="_SanPhams", ThisKey="MaLoai", OtherKey="MaLoai")]
 		public EntitySet<SanPham> SanPhams
 		{
 			get
@@ -1720,13 +1625,13 @@ namespace shopBanDo.Models
 		private void attach_SanPhams(SanPham entity)
 		{
 			this.SendPropertyChanging();
-			entity.LoaiSP = this;
+			entity.LoaiSanPham = this;
 		}
 		
 		private void detach_SanPhams(SanPham entity)
 		{
 			this.SendPropertyChanging();
-			entity.LoaiSP = null;
+			entity.LoaiSanPham = null;
 		}
 	}
 	
@@ -1736,7 +1641,7 @@ namespace shopBanDo.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MaNV;
+		private int _MaNV;
 		
 		private string _TenNV;
 		
@@ -1750,17 +1655,19 @@ namespace shopBanDo.Models
 		
 		private string _Pass;
 		
-		private string _ChucVu;
+		private System.Nullable<int> _MaCV;
 		
 		private EntitySet<DonDatHang> _DonDatHangs;
 		
 		private EntitySet<HoaDon> _HoaDons;
 		
+		private EntityRef<ChucVu> _ChucVu;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaNVChanging(string value);
+    partial void OnMaNVChanging(int value);
     partial void OnMaNVChanged();
     partial void OnTenNVChanging(string value);
     partial void OnTenNVChanged();
@@ -1774,19 +1681,20 @@ namespace shopBanDo.Models
     partial void OnUserChanged();
     partial void OnPassChanging(string value);
     partial void OnPassChanged();
-    partial void OnChucVuChanging(string value);
-    partial void OnChucVuChanged();
+    partial void OnMaCVChanging(System.Nullable<int> value);
+    partial void OnMaCVChanged();
     #endregion
 		
 		public NhanVien()
 		{
 			this._DonDatHangs = new EntitySet<DonDatHang>(new Action<DonDatHang>(this.attach_DonDatHangs), new Action<DonDatHang>(this.detach_DonDatHangs));
 			this._HoaDons = new EntitySet<HoaDon>(new Action<HoaDon>(this.attach_HoaDons), new Action<HoaDon>(this.detach_HoaDons));
+			this._ChucVu = default(EntityRef<ChucVu>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaNV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaNV
 		{
 			get
 			{
@@ -1925,22 +1833,26 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChucVu", DbType="NVarChar(50)")]
-		public string ChucVu
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaCV", DbType="Int")]
+		public System.Nullable<int> MaCV
 		{
 			get
 			{
-				return this._ChucVu;
+				return this._MaCV;
 			}
 			set
 			{
-				if ((this._ChucVu != value))
+				if ((this._MaCV != value))
 				{
-					this.OnChucVuChanging(value);
+					if (this._ChucVu.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaCVChanging(value);
 					this.SendPropertyChanging();
-					this._ChucVu = value;
-					this.SendPropertyChanged("ChucVu");
-					this.OnChucVuChanged();
+					this._MaCV = value;
+					this.SendPropertyChanged("MaCV");
+					this.OnMaCVChanged();
 				}
 			}
 		}
@@ -1968,6 +1880,40 @@ namespace shopBanDo.Models
 			set
 			{
 				this._HoaDons.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ChucVu_NhanVien", Storage="_ChucVu", ThisKey="MaCV", OtherKey="MaCV", IsForeignKey=true)]
+		public ChucVu ChucVu
+		{
+			get
+			{
+				return this._ChucVu.Entity;
+			}
+			set
+			{
+				ChucVu previousValue = this._ChucVu.Entity;
+				if (((previousValue != value) 
+							|| (this._ChucVu.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ChucVu.Entity = null;
+						previousValue.NhanViens.Remove(this);
+					}
+					this._ChucVu.Entity = value;
+					if ((value != null))
+					{
+						value.NhanViens.Add(this);
+						this._MaCV = value.MaCV;
+					}
+					else
+					{
+						this._MaCV = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ChucVu");
+				}
 			}
 		}
 		
@@ -2022,13 +1968,13 @@ namespace shopBanDo.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MaSP;
+		private int _MaSP;
 		
 		private string _TenSP;
 		
-		private System.Data.Linq.Binary _HinhAnh;
+		private string _HinhAnh;
 		
-		private string _MaLoai;
+		private System.Nullable<int> _MaLoai;
 		
 		private System.Nullable<double> _DonGia;
 		
@@ -2036,19 +1982,19 @@ namespace shopBanDo.Models
 		
 		private EntitySet<DonDatHang> _DonDatHangs;
 		
-		private EntityRef<LoaiSP> _LoaiSP;
+		private EntityRef<LoaiSanPham> _LoaiSanPham;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaSPChanging(string value);
+    partial void OnMaSPChanging(int value);
     partial void OnMaSPChanged();
     partial void OnTenSPChanging(string value);
     partial void OnTenSPChanged();
-    partial void OnHinhAnhChanging(System.Data.Linq.Binary value);
+    partial void OnHinhAnhChanging(string value);
     partial void OnHinhAnhChanged();
-    partial void OnMaLoaiChanging(string value);
+    partial void OnMaLoaiChanging(System.Nullable<int> value);
     partial void OnMaLoaiChanged();
     partial void OnDonGiaChanging(System.Nullable<double> value);
     partial void OnDonGiaChanged();
@@ -2059,12 +2005,12 @@ namespace shopBanDo.Models
 		public SanPham()
 		{
 			this._DonDatHangs = new EntitySet<DonDatHang>(new Action<DonDatHang>(this.attach_DonDatHangs), new Action<DonDatHang>(this.detach_DonDatHangs));
-			this._LoaiSP = default(EntityRef<LoaiSP>);
+			this._LoaiSanPham = default(EntityRef<LoaiSanPham>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaSP
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSP", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaSP
 		{
 			get
 			{
@@ -2103,8 +2049,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HinhAnh", DbType="Binary(50)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary HinhAnh
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HinhAnh", DbType="VarChar(50)")]
+		public string HinhAnh
 		{
 			get
 			{
@@ -2123,8 +2069,8 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLoai", DbType="VarChar(10)")]
-		public string MaLoai
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLoai", DbType="Int")]
+		public System.Nullable<int> MaLoai
 		{
 			get
 			{
@@ -2134,7 +2080,7 @@ namespace shopBanDo.Models
 			{
 				if ((this._MaLoai != value))
 				{
-					if (this._LoaiSP.HasLoadedOrAssignedValue)
+					if (this._LoaiSanPham.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2200,26 +2146,26 @@ namespace shopBanDo.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiSP_SanPham", Storage="_LoaiSP", ThisKey="MaLoai", OtherKey="MaLoai", IsForeignKey=true)]
-		public LoaiSP LoaiSP
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiSanPham_SanPham", Storage="_LoaiSanPham", ThisKey="MaLoai", OtherKey="MaLoai", IsForeignKey=true)]
+		public LoaiSanPham LoaiSanPham
 		{
 			get
 			{
-				return this._LoaiSP.Entity;
+				return this._LoaiSanPham.Entity;
 			}
 			set
 			{
-				LoaiSP previousValue = this._LoaiSP.Entity;
+				LoaiSanPham previousValue = this._LoaiSanPham.Entity;
 				if (((previousValue != value) 
-							|| (this._LoaiSP.HasLoadedOrAssignedValue == false)))
+							|| (this._LoaiSanPham.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._LoaiSP.Entity = null;
+						this._LoaiSanPham.Entity = null;
 						previousValue.SanPhams.Remove(this);
 					}
-					this._LoaiSP.Entity = value;
+					this._LoaiSanPham.Entity = value;
 					if ((value != null))
 					{
 						value.SanPhams.Add(this);
@@ -2227,9 +2173,9 @@ namespace shopBanDo.Models
 					}
 					else
 					{
-						this._MaLoai = default(string);
+						this._MaLoai = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("LoaiSP");
+					this.SendPropertyChanged("LoaiSanPham");
 				}
 			}
 		}
